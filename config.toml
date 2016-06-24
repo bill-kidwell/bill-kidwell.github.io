@@ -1,4 +1,4 @@
-baseurl = "http://bill-kidwell.github.io/"
+baseurl = "http://billkidwell.com/"
 languageCode = "en-us"
 title = "Bill Kidwell"
 theme = "beautifulhugo"
