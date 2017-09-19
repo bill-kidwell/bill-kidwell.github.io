@@ -109,45 +109,28 @@
                     <li>iterates over an array</li>
                     <li>calls the function on each element</li>
                     <li>returns results in a new array</li>
-                    <li>think of mapping from one domain to another</li>
+                    <li>think of mapping from one coordinate space to another</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Some fundamentals</h2>
                 <h3>map</h3>
-                <pre class="JavaScript"><code data-trim>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
                     const double = x => x * 2;
                     R.map(double, [1,2,3]); //=> [2,4,6]
                     [1,2,3].map(double); //=> [2,4,6]
                 </code></pre>
-                <p>... or map over an object</p>
-                <pre class="JavaScript"><code data-trim>
+                </div>
+                <p class="fragment">... or map over an object</p>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
                     const data = { a: 1, b: 2, c: 3 };
                     R.map(double, data);  //=> { a: 2, b: 4, c: 6 }
                 </code></pre>
+                </div>
 
-            </section>
-
-            <section>
-                <h2>Speaking of objects...</h2>
-                <div>
-                    <pre class="JavaScript"><code data-trim>
-                    const obj = {a: 2, b: 4, c: 6};
-                </code></pre>
-                </div>
-                <div class="fragment">
-                    <pre class="JavaScript"><code data-trim>
-                    // Get the keys
-                    R.keys(obj); // => ['a', 'b', 'c']
-                </code></pre>
-                </div>
-                <div class="fragment">
-                    <pre class="JavaScript"><code data-trim>
-                    // Get the values
-                    R.values(obj); // => [2, 4, 6]
-                </code></pre>
-                </div>
             </section>
 
             <section>
@@ -166,16 +149,19 @@
                     const sum = R.reduce(R.add, 0, array); // => 6
                 </code></pre>
                 <div class="fragment">
-                    <pre class="JavaScript"><code data-trim>var result = 0;</code></pre>
+                    <pre class="JavaScript"><code data-trim>var acc = 0;</code></pre>
                 </div>
                 <div class="fragment">
-                    <pre class="JavaScript"><code data-trim>result = R.add(result, array[0]); // => 0 + 1 = 1</code></pre>
+                    <pre class="JavaScript"><code data-trim>acc = R.add(acc, array[0]); // => 0 + 1 = 1</code></pre>
                 </div>
                 <div class="fragment">
-                    <pre class="JavaScript"><code data-trim>result = R.add(result, array[1]); // => 1 + 2 = 3</code></pre>
+                    <pre class="JavaScript"><code data-trim>acc = R.add(acc, array[1]); // => 1 + 2 = 3</code></pre>
                 </div>
                 <div class="fragment">
-                    <pre class="JavaScript"><code data-trim>result = R.add(result, array[2]); // => 3 + 3 = 6</code></pre>
+                    <pre class="JavaScript"><code data-trim>acc = R.add(acc, array[2]); // => 3 + 3 = 6</code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>return acc; // => 6</code></pre>
                 </div>
             </section>
 
@@ -224,22 +210,9 @@
 
             <section>
                 <div class="spreadsheet" data-delimiter=",">
-category, customer, amount 
-Elite, Eric, 34.99 
-Delux, Doug, 39.99 
-Delux, Drake, 39.99 
-Lite, Lewis, 29.99 
-Elite, Eleanor, 34.99
-Delux, Dakota, 39.99 
-Plus, Paul, 24.99 
-Elite, Ellen, 34.99 
-Basic, Bob, 12.99 
-Delux, David, 39.99 
-Lite, Linda, 29.99 
-Plus, Pauline, 24.99 
-Delux, Diego, 39.99 
-Lite, Lenny, 29.99 
-Elite, Edward, 34.99
+                    category, customer, amount Elite, Eric, 34.99 Delux, Doug, 39.99 Delux, Drake, 39.99 Lite, Lewis, 29.99 Elite, Eleanor, 34.99
+                    Delux, Dakota, 39.99 Plus, Paul, 24.99 Elite, Ellen, 34.99 Basic, Bob, 12.99 Delux, David, 39.99 Lite,
+                    Linda, 29.99 Plus, Pauline, 24.99 Delux, Diego, 39.99 Lite, Lenny, 29.99 Elite, Edward, 34.99
                 </div>
             </section>
 
@@ -312,8 +285,24 @@ Elite, Edward, 34.99
                 <h3>Back to filtering...</h3>
                 <pre class="JavaScript"><code data-trim>
                    const eliteSales = R.filter(isElite, sales);
-                   const deluxSales = R.filter(isDelux, sales);
+                   // => [
+                   //   { category: "Elite", customer: "Eric", amount: 34.99 },
+                   //   { category: "Elite", customer: "Eleanor", amount: 34.99 },
+                   //   { category: "Elite", customer: "Ellen", amount: 34.99 },
+                   //   { category: "Elite", customer: "Edward", amount: 34.99 } 
+                   // ]
                 </code></pre>
+                <pre class="JavaScript"><code data-trim>                   
+                   const deluxSales = R.filter(isDelux, sales);
+                   // => [
+                   //   { category: "Delux", customer: "Doug", amount: 39.99 },
+                   //   { category: "Delux", customer: "Drake", amount: 39.99 },
+                   //   { category: "Delux", customer: "Dakota", amount: 39.99 },
+                   //   { category: "Delux", customer: "David", amount: 39.99 },
+                   //   { category: "Delux", customer: "Diego", amount: 39.99 }
+                   // ]
+                 </code></pre>
+
             </section>
 
             <section>
@@ -371,29 +360,29 @@ Elite, Edward, 34.99
                 <h3>Let's break that down...</h3>
                 <pre class="JavaScript"><code data-trim>
                     calculateTotal("Elite", sales); 
-                </code></pre>                    
+                </code></pre>
                 <div class="fragment">
                     <pre class="JavaScript"><code data-trim>
                         var result1 = 
                             filterByCategory("Elite", sales) // => List of all elite sales
                     </code></pre>
-                </div>                   
+                </div>
                 <div class="fragment">
                     <pre class="JavaScript"><code data-trim>
                         var result2 = getSalesAmounts(result1); // => Array of all amounts
                     </code></pre>
-                </div>                   
+                </div>
                 <div class="fragment">
                     <pre class="JavaScript"><code data-trim>
                         sum(result2); // => 139.96
                     </code></pre>
-                </div>                   
+                </div>
                 <div class="fragment">
                     <pre class="JavaScript"><code data-trim>
                         //Which is equivalent to...
                         sum( getSalesAmounts( filterByCategory("Elite",sales) ) );
                     </code></pre>
-                </div>                                   
+                </div>
             </section>
 
             <section>
@@ -402,7 +391,7 @@ Elite, Edward, 34.99
                     <pre class="JavaScript"><code data-trim>
                         R.groupBy( R.prop("category"), sales );
                     </code></pre>
-                </div>                       
+                </div>
 
                 <div class="fragment">
                     <pre class="JavaScript"><code data-trim>
@@ -419,7 +408,7 @@ Elite, Edward, 34.99
                             ...
                         }
                     </code></pre>
-                </div>                                                   
+                </div>
             </section>
             <section>
                 <pre class="JavaScript"><code data-trim>
@@ -436,7 +425,7 @@ Elite, Edward, 34.99
                     )
 
                     allTotals(sales);
-                </code></pre>                    
+                </code></pre>
                 <pre class="JavaScript"><code data-trim>
                     {
                         Basic: 12.99,
@@ -445,9 +434,130 @@ Elite, Edward, 34.99
                         Lite: 89.97,
                         Plus: 49.98
                     }                    
-                </code></pre>                    
+                </code></pre>
+            </section>
+            <section>
+                    <iframe height='512' scrolling='no' title='Object of Arrays to Array of Objects' src='//codepen.io/bill-kidwell/embed/qXLRxd/?height=265&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/bill-kidwell/pen/qXLRxd/'>Object of Arrays to Array of Objects</a> by Bill Kidwell (<a href='https://codepen.io/bill-kidwell'>@bill-kidwell</a>) on <a href='https://codepen.io'>CodePen</a>.
+                    </iframe>
+            </section>
+            <section>
+                <h3>"zip" Objects</h3>
+                <pre class="JavaScript"><code data-trim>
+                    var labelArray = ['Basic', 'Plus', 'Lite', 'Elite', 'Delux'];
+                    var valueArray = [1,2,3,4,5];
+                    
+                    var result = R.zipObj(labelArray, valueArray);                
+                </code></pre>
+                <pre class="JavaScript"><code data-trim>
+                    { 
+                      "Basic": 1,
+                      "Plus":  2,
+                      "Lite":  3,
+                      "Elite": 4,
+                      "Delux": 5
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h3>Problem statement</h3>
+                <ul>
+                    <li class="fragment">Input is an object, where each value is an array</li>
+                    <li class="fragment">Returns an array of objects</li>
+                    <li class="fragment">Each object has the keys of the original object</li>
+                    <li class="fragment">The length of the array is == shortest array</li>
+                </ul>
             </section>
 
+            <section>
+                <h3>Step 1: Get the Lengths of the Arrays</h3>
+                <pre class="JavaScript"><code data-trim>
+                    const getLengths =
+                        arrayObj => R.map(R.length, arrayObj);
+                </code></pre>
+                <pre class="JavaScript"><code data-trim>
+                    var arrayData = {
+                        label: ["Basic", "Plus", "Lite", "Elite", 
+                                "Delux", "Oops", "Uh Oh"],
+                        value: [1, 2, 3, 4, 5],
+                        color: d3.schemeSet1
+                    };
+
+                    getLengths(arrayData); // => { label: 7, value: 5, color: 10 }
+                </code></pre>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Step 2: Find the length of the smallest array</h3>
+                    <pre class="JavaScript"><code data-trim>
+                        // To get the values of the object
+                        R.values(lengths); // => [7,5,10]
+
+                        const getMinOfObject = 
+                            lengthObj => 
+                                R.reduce(R.min, Number.MAX_VALUE, R.values(lengthObj));
+
+                        // => 5
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Speaking of objects...</h2>
+                    <div>
+                        <pre class="JavaScript"><code data-trim>
+                        const obj = {a: 2, b: 4, c: 6};
+                    </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre class="JavaScript"><code data-trim>
+                        // Get the keys
+                        R.keys(obj); // => ['a', 'b', 'c']
+                    </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre class="JavaScript"><code data-trim>
+                        // Get the values
+                        R.values(obj); // => [2, 4, 6]
+                    </code></pre>
+                    </div>
+                </section>                
+            </section>
+
+            <section>
+                <h3>Step 3: Build an index array</h3>
+                <p>Instead of determining which array was smallest...</p>
+                <pre class="JavaScript"><code data-trim>
+                    R.range(0, 5); // => [0,1,2,3,4]
+
+                    const getIndexes 
+                        = R.pipe( 
+                            getLengths, 
+                            getMinOfObject, 
+                            R.range(0)
+                        );
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Step 4: Get the nth value of each array</h3>
+                <pre class="JavaScript"><code data-trim>
+                    const getNth = R.curry( 
+                        (arrayObj, n) => R.map( R.nth(n), arrayObj ) 
+                    );
+
+                    getNth(arrayData, 0); 
+                    // => {label:"Basic", value: 1, color:"#e41a1c"},
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>As a single function</h3>
+                <pre class="JavaScript"><code data-trim>
+                    function zipArrays( arrayObj ) { 
+                        var indexes = getIndexes(arrayObj);
+                        return R.map(getNth(arrayObj), indexes);
+                    }                                              
+                </code></pre>
+            </section>
 
         </div>
     </div>
