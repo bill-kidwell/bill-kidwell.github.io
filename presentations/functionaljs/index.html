@@ -210,9 +210,22 @@
 
             <section>
                 <div class="spreadsheet" data-delimiter=",">
-                    category, customer, amount Elite, Eric, 34.99 Delux, Doug, 39.99 Delux, Drake, 39.99 Lite, Lewis, 29.99 Elite, Eleanor, 34.99
-                    Delux, Dakota, 39.99 Plus, Paul, 24.99 Elite, Ellen, 34.99 Basic, Bob, 12.99 Delux, David, 39.99 Lite,
-                    Linda, 29.99 Plus, Pauline, 24.99 Delux, Diego, 39.99 Lite, Lenny, 29.99 Elite, Edward, 34.99
+                    category, customer, amount 
+                    Elite, Eric, 34.99 
+                    Delux, Doug, 39.99 
+                    Delux, Drake, 39.99 
+                    Lite, Lewis, 29.99 
+                    Elite, Eleanor, 34.99
+                    Delux, Dakota, 39.99 
+                    Plus, Paul, 24.99 
+                    Elite, Ellen, 34.99 
+                    Basic, Bob, 12.99
+                    Delux, David, 39.99 
+                    Lite, Linda, 29.99 
+                    Plus, Pauline, 24.99 
+                    Delux, Diego, 39.99 
+                    Lite, Lenny, 29.99 
+                    Elite, Edward, 34.99
                 </div>
             </section>
 
@@ -282,6 +295,21 @@
             </section>
 
             <section>
+                <h3>Manually currying our function</h3>
+                <pre class="JavaScript"><code data-trim>
+                    const isCategory = function(cat) {
+                        return function (object) {
+                            return R.prop('category', object) === cat;
+                        }
+                    }
+
+                    const isElite = isCategory('Elite');
+                    isElite(firstSale); // => true
+                    isElite(secondSale); // => false
+                </code></pre>
+            </section>
+
+            <section>
                 <h3>Back to filtering...</h3>
                 <pre class="JavaScript"><code data-trim>
                    const eliteSales = R.filter(isElite, sales);
@@ -317,12 +345,11 @@
                 <div class="fragment">
                     <pre class="JavaScript"><code data-trim>
                     // Total of sales
-                    const sum = R.reduce(R.add, 0);
                     const getSalesAmounts = R.map(R.prop("amount"));
-
                     const eliteSalesAmounts 
                     = getSalesAmounts(eliteSales); // => [34.99, 34.99, 34.99, 34.99]
 
+                    const sum = R.reduce(R.add, 0);
                     sum(eliteSalesAmounts); // 139.96
                 </code></pre>
                 </div>
@@ -491,7 +518,7 @@
                     <h3>Step 2: Find the length of the smallest array</h3>
                     <pre class="JavaScript"><code data-trim>
                         // To get the values of the object
-                        R.values(lengths); // => [7,5,10]
+                        R.values(lengthObj); // => [7,5,10]
 
                         const getMinOfObject = 
                             lengthObj => 
@@ -557,6 +584,28 @@
                         return R.map(getNth(arrayObj), indexes);
                     }                                              
                 </code></pre>
+            </section>
+
+            <section>
+                <iframe height='512' scrolling='no' title='Object of Arrays to Array of Objects' src='//codepen.io/bill-kidwell/embed/qXLRxd/?height=265&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/bill-kidwell/pen/qXLRxd/'>Object of Arrays to Array of Objects</a> by Bill Kidwell (<a href='https://codepen.io/bill-kidwell'>@bill-kidwell</a>) on <a href='https://codepen.io'>CodePen</a>.
+                </iframe>
+            </section>
+
+            <section>
+                <h2>Conclusions</h2>
+                <ul>
+                    <li>The barrier to entry is low</li>
+                    <li>You probably use aspects of it today</li>
+                    <li>Start by using pure functions when you can</li>
+                    <li>map and reduce are a good starting point</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Recommended Reading</h2>
+                <p>Randy Coulman's series <a href="http://randycoulman.com/blog/2016/05/24/thinking-in-ramda-getting-started/">Thinking in Ramda</a></p>
+                <p>Eric Elliot's series <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea">Composing Software</a></p>
+                <p><a href="https://drboolean.gitbooks.io/mostly-adequate-guide/">Professor Frisby's Mostly Adequate Guide to Functional Programming</a> by Brian Lonsdorf (aka Dr. Boolean)</p>
             </section>
 
         </div>
