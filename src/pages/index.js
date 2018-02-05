@@ -15,12 +15,10 @@ class BlogIndex extends React.Component {
       <div>
         <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
         <Bio />
-        {posts.map(post => {
-          if (post.node.path !== '/404/') {
-            return (
-              <Post post={post} />
-            );
-          }
+        {posts.map( (post, index) => {
+          return (
+            <Post key={index} post={post} />
+          );
         })}
       </div>
     )

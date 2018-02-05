@@ -18,7 +18,7 @@ const Header = ({title, path, date}) => {
                 <h2><a href={path}>{title}</a></h2>
             </div>
             <div className="meta">
-                <time className="published" datetime="{date}">{date}</time>
+                <time className="published" dateTime="{date}">{date}</time>
             </div>
         </header>
     );
