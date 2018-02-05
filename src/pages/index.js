@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import Helmet from 'react-helmet'
 
 import Bio from '../components/Bio'
-import Img from 'gatsby-image'
+import Post from '../components/post/shortPost';
 
 class BlogIndex extends React.Component {
   render() {
@@ -17,18 +17,8 @@ class BlogIndex extends React.Component {
         <Bio />
         {posts.map(post => {
           if (post.node.path !== '/404/') {
-            const title = get(post, 'node.frontmatter.title') || post.node.path
             return (
-              <div key={post.node.frontmatter.path}>
-                <h3>
-                  <Link to={post.node.frontmatter.path} >
-                    {post.node.frontmatter.title}
-                  </Link>
-                </h3>
-                <Img sizes={post.node.frontmatter.cover.childImageSharp.sizes} />
-                <small>{post.node.frontmatter.date}</small>
-                <p dangerouslySetInnerHTML={{ __html: post.node.excerpt }} />
-              </div>
+              <Post post={post} />
             );
           }
         })}
