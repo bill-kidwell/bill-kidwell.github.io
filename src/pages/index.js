@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import Helmet from 'react-helmet'
 
 import Bio from '../components/Bio'
+import Sidebar from '../components/sidebar/sidebar';
 import Post from '../components/post/shortPost';
 
 class BlogIndex extends React.Component {
@@ -12,15 +13,14 @@ class BlogIndex extends React.Component {
     const posts = get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
-      <div>
-        <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
-        <Bio />
-        {posts.map( (post, index) => {
-          return (
-            <Post key={index} post={post} />
-          );
-        })}
-      </div>
+        <div id="main">
+          <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
+          {posts.map( (post, index) => {
+            return (
+              <Post key={index} post={post} />
+            );
+          })}
+        </div>
     )
   }
 }
