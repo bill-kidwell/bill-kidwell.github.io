@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image'
+//import Img from 'gatsby-image';
+import CoverImage from '../CoverImage';
 
 /*
 After <time ... />
@@ -8,7 +9,7 @@ After <time ... />
     <span class="name">
         Jane Doe
     </span>
-    <img src="images/avatar.jpg" alt="" />
+    < src="images/avatar.jpg" alt="" />
 </a>
 */
 const Header = ({title, path, date}) => {
@@ -29,19 +30,6 @@ Header.propTypes = {
     path: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired
 }
-
-const CoverImage = ({path, cover}) => {
-    return (
-        <a href={path} className="image featured">
-            <Img sizes={cover.childImageSharp.sizes} />
-        </a>
-    );
-};
-
-CoverImage.propTypes = {
-    path: PropTypes.string.isRequired,
-    cover: PropTypes.object.isRequired
-};
 
 // TODO: Add category link.  Add disqus control for likes, comments.
 /*

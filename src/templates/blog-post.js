@@ -4,22 +4,44 @@ import Link from 'gatsby-link'
 import get from 'lodash/get'
 
 import Bio from '../components/Bio'
+import CoverImage from '../components/CoverImage';
+import Footer from '../components/footer';
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
+    const {
+      title,
+      date,
+      path,
+      cover
+    } = post.frontmatter;
+
     return (
-      <div>
-        <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
-        <h1>{post.frontmatter.title}</h1>
-        <p>
-          {post.frontmatter.date}
-        </p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr />
-        <Bio />
+      <div className="single">
+        <div id="wrapper">
+          <div id="main">
+            <Helmet title={`${title} | ${siteTitle}`} />
+
+            <article className="post">
+              <header>
+                <div className="title">
+                  <h2><a href="#">{title}</a></h2>
+                </div>
+                <div className="meta">
+                  <time className="published" dateTime={date}>{date}</time>
+                </div>
+              </header>
+              <CoverImage path={path} cover={cover} />
+              <div dangerouslySetInnerHTML={{ __html: post.html }} />
+            </article>
+            <hr />
+            <Bio />
+            <Footer />
+          </div>
+        </div>
       </div>
     )
   }
@@ -39,8 +61,16 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
+        date(formatString: "DD MMMM, YYYY")
         title
-        date(formatString: "MMMM DD, YYYY")
+        path
+        cover {
+          childImageSharp {
+            sizes(maxWidth: 630) {
+              ...GatsbyImageSharpSizes
+            }
+          }
+        }
       }
     }
   }

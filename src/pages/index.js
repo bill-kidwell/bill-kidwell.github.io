@@ -13,13 +13,16 @@ class BlogIndex extends React.Component {
     const posts = get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
-        <div id="main">
-          <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
-          {posts.map( (post, index) => {
-            return (
-              <Post key={index} post={post} />
-            );
-          })}
+        <div id="wrapper">
+          <div id="main">
+            <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
+            {posts.map( (post, index) => {
+              return (
+                <Post key={index} post={post} />
+              );
+            })}
+          </div>
+          <Sidebar />
         </div>
     )
   }

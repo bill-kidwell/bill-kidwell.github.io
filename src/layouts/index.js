@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from '../components/header';
-import Sidebar from '../components/sidebar';
 
 import "../styles/main.scss"
 
@@ -8,10 +7,9 @@ class Template extends React.Component {
   render() {
     const { location, children } = this.props
     return (
-      <div id="wrapper">
+      <div>
         <Header location={location} />
         {children()}
-        <Sidebar />
       </div>
     )
   }
