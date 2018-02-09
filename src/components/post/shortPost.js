@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //import Img from 'gatsby-image';
 import CoverImage from '../CoverImage';
+import avatar from '../../img/avatar.png';
 
 /*
 After <time ... />
@@ -12,7 +13,7 @@ After <time ... />
     < src="images/avatar.jpg" alt="" />
 </a>
 */
-const Header = ({title, path, date}) => {
+const Header = ({ title, path, date }) => {
     return (
         <header>
             <div className="title">
@@ -20,6 +21,12 @@ const Header = ({title, path, date}) => {
             </div>
             <div className="meta">
                 <time className="published" dateTime="{date}">{date}</time>
+                <a href="/about" className="author">
+                    <span className="name">
+                        Bill Kidwell
+                    </span>
+                    <img src={avatar} alt="" />
+                </a>
             </div>
         </header>
     );
@@ -39,7 +46,7 @@ Header.propTypes = {
                 <li><a href="#" class="icon fa-comment">128</a></li>
             </ul>
 */
-const Footer = ({path}) => {
+const Footer = ({ path }) => {
     return (
         <footer>
             <ul className="actions">
@@ -53,9 +60,9 @@ Footer.propTypes = {
     path: PropTypes.string.isRequired
 }
 
-const Post =({post}) => {
-    const {excerpt} = post.node;
-    const { 
+const Post = ({ post }) => {
+    const { excerpt } = post.node;
+    const {
         title,
         path,
         date,
@@ -66,7 +73,7 @@ const Post =({post}) => {
             <Header title={title} path={path} date={date} />
             <CoverImage path={path} cover={cover} />
             <p dangerouslySetInnerHTML={{ __html: post.node.excerpt }} />
-            <Footer path={path}/>
+            <Footer path={path} />
         </article>
     );
 }
