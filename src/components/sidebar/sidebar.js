@@ -8,16 +8,19 @@ const Sidebar = ({ location }) => {
             <section id="intro">
                 <a href="#" className="logo"><img src="images/logo.jpg" alt="" /></a>
                 <header>
-                    <h2>Gatsby Starter Blog</h2>
-                    <p>Another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
+                    <h2>Welcome!</h2>
                 </header>
+            </section>
+
+            <section className="blurb">
+                <p>Thank you for visiting.  Please take the time to leave a comment below.  I am always interested in learning more about readers, and how I can improve the content here.</p>
             </section>
             
             <section className="blurb">
-                <h2>About</h2>
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
+                <h2>Bio</h2>
+                <p>I am a software engineer, architect and scholar.  I write this blog to share what I have learned, and to meet others with similar interests.</p>
                 <ul className="actions">
-                    <li><a href="#" className="button">Learn More</a></li>
+                    <li><a href="/about" className="button">Learn More</a></li>
                 </ul>
             </section>
 

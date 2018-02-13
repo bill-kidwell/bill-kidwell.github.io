@@ -6,7 +6,7 @@ const Header = ({ location }) => {
         <div id="header">
             <h1>
                 <Link to={'/'}>
-                    Gatsby Starter Blog
+                    Bill Kidwell
                 </Link>
             </h1>
         </div>

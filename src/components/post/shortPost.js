@@ -4,15 +4,6 @@ import PropTypes from 'prop-types';
 import CoverImage from '../CoverImage';
 import avatar from '../../img/avatar.png';
 
-/*
-After <time ... />
-<a href="#" class="author">
-    <span class="name">
-        Jane Doe
-    </span>
-    < src="images/avatar.jpg" alt="" />
-</a>
-*/
 const Header = ({ title, path, date }) => {
     return (
         <header>

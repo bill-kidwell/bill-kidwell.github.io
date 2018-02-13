@@ -3,7 +3,6 @@ import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import get from 'lodash/get'
 
-import Bio from '../components/Bio'
 import CoverImage from '../components/CoverImage';
 import Footer from '../components/footer';
 
