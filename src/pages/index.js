@@ -62,12 +62,3 @@ query IndexQuery {
   }
 }
 `
-/*
-            cover {
-              childImageSharp {
-                sizes(maxWidth: 630) {
-                  ...GatsbyImageSharpSizes
-                }
-              }
-            }
-*/
