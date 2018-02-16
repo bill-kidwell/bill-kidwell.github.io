@@ -2,32 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //import Img from 'gatsby-image';
 import CoverImage from '../CoverImage';
-import avatar from '../../img/avatar.png';
+import Header from './postHeader';
 
-const Header = ({ title, path, date }) => {
-    return (
-        <header>
-            <div className="title">
-                <h2><a href={path}>{title}</a></h2>
-            </div>
-            <div className="meta">
-                <time className="published" dateTime="{date}">{date}</time>
-                <a href="/about" className="author">
-                    <span className="name">
-                        Bill Kidwell
-                    </span>
-                    <img src={avatar} alt="" />
-                </a>
-            </div>
-        </header>
-    );
-};
-
-Header.propTypes = {
-    title: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
-}
 
 // TODO: Add category link.  Add disqus control for likes, comments.
 /*

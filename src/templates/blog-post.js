@@ -4,6 +4,7 @@ import Link from 'gatsby-link'
 import get from 'lodash/get'
 
 import CoverImage from '../components/CoverImage';
+import Header from '../components/post/postHeader';
 import Footer from '../components/footer';
 
 class BlogPostTemplate extends React.Component {
@@ -25,14 +26,7 @@ class BlogPostTemplate extends React.Component {
             <Helmet title={`${title} | ${siteTitle}`} />
 
             <article className="post">
-              <header>
-                <div className="title">
-                  <h2><a href="#">{title}</a></h2>
-                </div>
-                <div className="meta">
-                  <time className="published" dateTime={date}>{date}</time>
-                </div>
-              </header>
+              <Header title={title} path={path} date={date} />
               <CoverImage path={path} cover={cover} />
               <div dangerouslySetInnerHTML={{ __html: post.html }} />
             </article>
