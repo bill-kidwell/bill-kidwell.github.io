@@ -31,13 +31,14 @@ const Post = ({ post }) => {
     const { excerpt } = post.node;
     const {
         title,
+        subtitle,
         path,
         date,
         cover
     } = post.node.frontmatter;
     return (
         <article className="post" key={path}>
-            <Header title={title} path={path} date={date} />
+            <Header title={title} subtitle={subtitle} path={path} date={date} />
             <CoverImage path={path} cover={cover} />
             <p dangerouslySetInnerHTML={{ __html: post.node.excerpt }} />
             <Footer path={path} />

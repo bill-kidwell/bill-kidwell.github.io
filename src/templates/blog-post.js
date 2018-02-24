@@ -14,6 +14,7 @@ class BlogPostTemplate extends React.Component {
 
     const {
       title,
+      subtitle,
       date,
       path,
       cover
@@ -26,7 +27,7 @@ class BlogPostTemplate extends React.Component {
             <Helmet title={`${title} | ${siteTitle}`} />
 
             <article className="post">
-              <Header title={title} path={path} date={date} />
+              <Header title={title} subtitle={subtitle} path={path} date={date} />
               <CoverImage path={path} cover={cover} />
               <div dangerouslySetInnerHTML={{ __html: post.html }} />
             </article>
@@ -55,6 +56,7 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "DD MMMM, YYYY")
         title
+        subtitle
         path
         cover {
           childImageSharp {

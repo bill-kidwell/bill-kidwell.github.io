@@ -47,6 +47,7 @@ query IndexQuery {
         frontmatter {
           date(formatString: "DD MMMM, YYYY")
           title
+          subtitle
           path
           cover {
             childImageSharp {
