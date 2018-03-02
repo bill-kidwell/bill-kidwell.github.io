@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
 
 const CoverImage = ({path, cover}) => {
+    if (cover == null) return null;
     return (
         <a href={path} className="image featured">
             <Img sizes={cover.childImageSharp.sizes} />
