@@ -3,6 +3,7 @@ title: "Some fun with d3 scales"
 date: "2016-07-04T21:21:13-04:00"
 subtitle: "d3 scales for positioning and color"
 path: "/some fun with d3 scales/"
+cover: "cover.png"
 ---
 In this article I expand on a tutorial that I enjoyed for d3. Most of the changes introduce the use of scales.  I start by introducing scales for calculating the locations and sizes of the marks on the chart, then apply them to vary the color of the marks and the associated labels.
 
@@ -10,11 +11,10 @@ I have been working with d3 on and off for the past year. It is a great library,
 
 In this post, I am going to go through some changes to the bar chart that I made for my own purposes.
 
-You can see a &ldquo;final&rdquo; result <a href="http://codepen.io/bill-kidwell/pen/ZOKgPQ">here</a>.
+You can see a "final" result [here](http://codepen.io/bill-kidwell/pen/ZOKgPQ).
 
-<p data-height="284" data-theme-id="dark" data-slug-hash="ZOKgPQ" data-default-tab="result" data-user="bill-kidwell" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/bill-kidwell/pen/ZOKgPQ/">D3 Bar Chart with Labels</a> by Bill Kidwell (<a href="http://codepen.io/bill-kidwell">@bill-kidwell</a>) on <a href="http://codepen.io">CodePen</a>.
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
+<iframe height='322' scrolling='no' title='D3 Bar Chart with Labels' src='//codepen.io/bill-kidwell/embed/ZOKgPQ/?height=322&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/bill-kidwell/pen/ZOKgPQ/'>D3 Bar Chart with Labels</a> by Bill Kidwell (<a href='https://codepen.io/bill-kidwell'>@bill-kidwell</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 ## Throw in a little es2015
 
 I am a big fan of babel.js and the new JavaScript language features.  One of the first things I did to tidy things up is replace some of the functions with big arrow syntax.
