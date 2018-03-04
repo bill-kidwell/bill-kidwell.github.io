@@ -6,7 +6,28 @@ import get from 'lodash/get'
 import CoverImage from '../components/CoverImage';
 import Header from '../components/post/postHeader';
 import Footer from '../components/footer';
-import Disqus from 'disqus-react';
+
+/**
+ * This stateless, functional component wraps the DiscussionEmbed component.
+ * Disqus is loaded only if window is available.  This fixes a problem when building
+ * the HTML in gatsby.  Based on the answer in this thread.
+ * https://stackoverflow.com/questions/48128022/gatsbyjs-build-show-error-window-is-not-defined-aos 
+ * @param {string} disqusShortname - disqus name
+ * @param {object} disqusConfig - configuration for disqus comment thread
+ */
+const Discussion = ({disqusShortname, disqusConfig}) => {
+  if (typeof window !== 'undefined' && disqusShortname && disqusConfig) {
+
+    const Disqus = require('disqus-react');
+
+    return (
+      <Disqus.DiscussionEmbed 
+        shortname={disqusShortname} config={disqusConfig} />
+    );
+  } else {
+    return null;
+  }
+}
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -40,7 +61,7 @@ class BlogPostTemplate extends React.Component {
                 disqusShortname={disqusShortname} disqusConfig={disqusConfig} />
               <CoverImage path={path} cover={cover} />
               <div dangerouslySetInnerHTML={{ __html: post.html }} />
-              <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+              <Discussion shortname={disqusShortname} config={disqusConfig} />
             </article>
             <hr />
             <Footer />
