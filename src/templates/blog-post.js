@@ -6,11 +6,13 @@ import get from 'lodash/get'
 import CoverImage from '../components/CoverImage';
 import Header from '../components/post/postHeader';
 import Footer from '../components/footer';
+import Disqus from 'disqus-react';
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.markdownRemark
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+    const post = this.props.data.markdownRemark;
+    const siteTitle = get(this.props, 'data.site.siteMetadata.title');
+    const siteUrl = get(this.props, 'data.site.siteMetadata.url');
 
     const {
       title,
@@ -20,6 +22,13 @@ class BlogPostTemplate extends React.Component {
       cover
     } = post.frontmatter;
 
+    const disqusShortname = 'billkidwellblog';
+    const disqusConfig = {
+        url: siteUrl + path,
+        identifier: path,
+        title: title,
+    };
+
     return (
       <div className="single">
         <div id="wrapper">
@@ -27,9 +36,11 @@ class BlogPostTemplate extends React.Component {
             <Helmet title={`${title} | ${siteTitle}`} />
 
             <article className="post">
-              <Header title={title} subtitle={subtitle} path={path} date={date} />
+              <Header title={title} subtitle={subtitle} path={path} date={date} 
+                disqusShortname={disqusShortname} disqusConfig={disqusConfig} />
               <CoverImage path={path} cover={cover} />
               <div dangerouslySetInnerHTML={{ __html: post.html }} />
+              <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
             </article>
             <hr />
             <Footer />
@@ -48,6 +59,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        url
       }
     }
     markdownRemark(frontmatter: { path: { eq: $path } }) {

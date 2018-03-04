@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
@@ -9,6 +10,8 @@ import Post from '../components/post/shortPost';
 class BlogIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+    const siteUrl = get(this, 'props.data.site.siteMetadata.url');
+    const disqusShortname = get(this, 'props.data.site.siteMetadata.disqusShortname');
     const posts = get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
@@ -17,7 +20,7 @@ class BlogIndex extends React.Component {
             <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
             {posts.map( (post, index) => {
               return (
-                <Post key={index} post={post} />
+                <Post key={index} post={post} disqusShortname={disqusShortname} siteUrl={siteUrl} />
               );
             })}
           </div>
@@ -28,7 +31,7 @@ class BlogIndex extends React.Component {
 }
 
 BlogIndex.propTypes = {
-  route: React.PropTypes.object,
+  route: PropTypes.object,
 }
 
 export default BlogIndex
@@ -38,6 +41,8 @@ query IndexQuery {
   site {
     siteMetadata {
       title
+      url
+      disqusShortname
     }
   }
   allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {

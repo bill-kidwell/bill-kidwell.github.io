@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Disqus from 'disqus-react';
 
 import avatar from '../../img/avatar.png';
 
-const Header = ({ title, subtitle, path, date }) => {
+
+
+const Header = ({ title, subtitle, path, date, disqusShortname, disqusConfig }) => {
     return (
         <header>
             <div className="title">
@@ -27,7 +30,9 @@ Header.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string,
     path: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
+    date: PropTypes.string.isRequired,
+    disqusShortname: PropTypes.string,
+    disqusConfig: PropTypes.object
 };
 
 export default Header;

@@ -10,7 +10,7 @@ const MiniPost = ({title, date, url, image}) => (
     <article className="mini-post">
         <header>
             <h3><a href={url}>{title}</a></h3>
-            <time className="published" datetime={date}>{date}</time>
+            <time className="published" dateTime={date}>{date}</time>
             <a href="/about" className="author"><img src={avatar} alt="Bill Kidwell" /></a>
         </header>
         <a href={url} className="image"><img src={image} alt="" /></a>
@@ -21,7 +21,7 @@ MiniPost.propTypes = {
     title: PropTypes.string.isRequired,
     date: PropTypes.string,
     url: PropTypes.string.isRequired,
-    image: PropTypes.object.isRequired
+    image: PropTypes.any.isRequired
 };
 
 const links = [
@@ -38,7 +38,7 @@ const MiniPosts = () => {
 
     return (
         <section>
-            <div class="mini-posts">
+            <div className="mini-posts">
                 {links.map( (link, index) => {
                     return (
                     <MiniPost key={index} 

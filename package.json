@@ -7,6 +7,8 @@
     "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
   },
   "dependencies": {
+    "disqus": "^0.3.0",
+    "disqus-react": "^1.0.4",
     "gatsby": "^1.9.222",
     "gatsby-image": "^1.0.34",
     "gatsby-link": "^1.6.8",
@@ -27,6 +29,7 @@
     "gatsby-transformer-remark": "^1.7.1",
     "gatsby-transformer-sharp": "^1.6.1",
     "lodash": "^4.15.0",
+    "react": "^16.2.0",
     "react-typography": "^0.16.13",
     "tachyons-sass": "^4.9.2",
     "typography": "^0.16.6"

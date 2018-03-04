@@ -2,7 +2,8 @@ module.exports = {
   siteMetadata: {
     title: "Bill Kidwell's blog on software.",
     author: "Bill Kidwell",
-    url: "http://billkidwell.com"
+    url: "http://billkidwell.com",
+    disqusShortname: "billkidwellblog",
   },
   plugins: [
     {
@@ -46,8 +47,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
-      },
+        trackingId: 'UA-79823920-1',
+      }
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
