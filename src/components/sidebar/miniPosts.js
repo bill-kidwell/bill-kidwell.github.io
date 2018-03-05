@@ -4,12 +4,13 @@ import Link from 'gatsby-link'
 
 import avatar from '../../img/avatar.png';
 
-import misfit from './MiSFIT_Cover_Image.png';
+import uknowledge from './UKnowledge_logo.png';
 
-const MiniPost = ({title, date, url, image}) => (
+const MiniPost = ({title, subtitle, date, url, image}) => (
     <article className="mini-post">
         <header>
             <h3><a href={url}>{title}</a></h3>
+            <h4>{subtitle}</h4>
             <time className="published" dateTime={date}>{date}</time>
             <a href="/about" className="author"><img src={avatar} alt="Bill Kidwell" /></a>
         </header>
@@ -26,10 +27,11 @@ MiniPost.propTypes = {
 
 const links = [
     { 
-        title: "MiSFIT: Mining Software Fault Information & Trends", 
+        title: "MiSFIT: Mining Software Fault Information & Trends",
+        subtitle: "CS Dissertation",
         date: "April 2015", 
         url: "https://uknowledge.uky.edu/cs_etds/33/",
-        image:  misfit
+        image:  uknowledge
     }
 ];
 
@@ -42,7 +44,8 @@ const MiniPosts = () => {
                 {links.map( (link, index) => {
                     return (
                     <MiniPost key={index} 
-                        title={link.title} 
+                        title={link.title}
+                        subtitle={link.subtitle} 
                         date={link.date} 
                         url={link.url} 
                         image={link.image} />

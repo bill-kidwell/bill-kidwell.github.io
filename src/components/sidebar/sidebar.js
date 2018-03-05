@@ -17,6 +17,7 @@ const Sidebar = ({ location }) => {
                 <p>Thank you for visiting.  Please take the time to leave a comment below.  I am always interested in learning more about readers, and how I can improve the content here.</p>
             </section>
 
+            <h3>Publications</h3>
             <MiniPosts />
             
             <section className="blurb">
