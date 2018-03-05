@@ -16,7 +16,7 @@ import Footer from '../components/footer';
  * @param {object} disqusConfig - configuration for disqus comment thread
  */
 const Discussion = ({disqusShortname, disqusConfig}) => {
-  if (window && disqusShortname && disqusConfig) {
+  if ((typeof window != "undefined") && disqusShortname && disqusConfig) {
 
     const Disqus = require('disqus-react');
 
