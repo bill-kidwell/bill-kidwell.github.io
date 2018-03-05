@@ -16,7 +16,7 @@ import Footer from '../components/footer';
  * @param {object} disqusConfig - configuration for disqus comment thread
  */
 const Discussion = ({disqusShortname, disqusConfig}) => {
-  if (typeof window !== 'undefined' && disqusShortname && disqusConfig) {
+  if (window && disqusShortname && disqusConfig) {
 
     const Disqus = require('disqus-react');
 
@@ -61,7 +61,7 @@ class BlogPostTemplate extends React.Component {
                 disqusShortname={disqusShortname} disqusConfig={disqusConfig} />
               <CoverImage path={path} cover={cover} />
               <div dangerouslySetInnerHTML={{ __html: post.html }} />
-              <Discussion shortname={disqusShortname} config={disqusConfig} />
+              <Discussion disqusShortname={disqusShortname} disqusConfig={disqusConfig} />
             </article>
             <hr />
             <Footer />
