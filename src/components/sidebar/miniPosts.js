@@ -4,8 +4,6 @@ import Link from 'gatsby-link'
 
 import avatar from '../../img/avatar.png';
 
-import uknowledge from './UKnowledge_logo.png';
-
 const MiniPost = ({title, subtitle, date, url, image}) => (
     <article className="mini-post">
         <header>
@@ -25,18 +23,8 @@ MiniPost.propTypes = {
     image: PropTypes.any.isRequired
 };
 
-const links = [
-    { 
-        title: "MiSFIT: Mining Software Fault Information & Trends",
-        subtitle: "CS Dissertation",
-        date: "April 2015", 
-        url: "https://uknowledge.uky.edu/cs_etds/33/",
-        image:  uknowledge
-    }
-];
 
-
-const MiniPosts = () => {
+const MiniPosts = ({links}) => {
 
     return (
         <section>

@@ -1,10 +1,10 @@
 {
-  "name": "gatsby-starter-blog-no-styles",
-  "description": "Starter Gatsby Blog No Styles",
+  "name": "bill-kidwell-blog",
+  "description": "A blog build with Gatsby.js.",
   "version": "1.0.0",
-  "author": "Noah Glusenkamp <noah.glusenkamp@gmail.com>",
+  "author": "Bill Kidwell <kidwell.bill+github@gmail.com>",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
+    "url": "https://github.com/bill-kidwell/bill-kidwell.github.io/issues"
   },
   "dependencies": {
     "disqus": "^0.3.0",

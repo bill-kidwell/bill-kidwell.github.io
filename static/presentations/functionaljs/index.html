@@ -3,39 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Reveal.js 3 Slide Demo</title>
+    <title>Functional Programming with JavaScript</title>
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/league.css" id="theme">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- ruleJS -->
+    <script src="plugin/spreadsheet/ruleJS.all.full.min.js"></script>
+    <link rel="stylesheet" href="plugin/spreadsheet/spreadsheet.css">
     <!--Add support for earlier versions of Internet Explorer -->
     <!--[if lt IE 9]>
 	<script src="lib/js/html5shiv.js"></script>
     <![endif]-->
-    <style>
-        /* Two-column layout */
-
-        .left-column h3 {
-            color: #ccc;
-        }
-
-        .left-column {
-            width: 20%;
-            height: 92%;
-            float: left;
-        }
-
-        .left-column h2:last-of-type,
-        .left-column h3:last-child {
-            color: #fff;
-        }
-
-        .right-column {
-            width: 75%;
-            float: right;
-            padding-top: 1em;
-        }
-
-        +
-    </style>
 </head>
 
 <body>
@@ -62,17 +40,573 @@
                     <li>Front end components with React.js</li>
                     <li>Data visualization with D3.js</li>
                 </ul>
+                <aside class="notes">
+                    I'm not a JavaScript expert, and I'm not a functional programming guru.
+                </aside>
             </section>
 
             <section data-background-image="functional-words.svg">
-                <!-- <img src='functional-words.svg' 
-                    width='800px' 
-                    height='600px'
-                    style='border-style: none' 
-                /> -->                
             </section>
 
+            <section>
+                <h3>Let's stick with a simple definition</h3>
+                <p>Functional programming is about functions without side effects</p>
+                <p style="font-size: 10pt;">
+                    Definition adapted from <a href="https://maryrosecook.com/blog/post/a-practical-introduction-to-functional-programming">
+                        Mary Rose Cook
+                    </a>
+                </p>
+            </section>
+
+            <section>
+                <h3>A pure function is a function which</h3>
+                <ul>
+                    <li>Given the same input, will always return the same output (deterministic)</li>
+                    <li>Produces no side effects (doesn't change external state)</li>
+                    <li>Relies on no external mutable state</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Impure increment function</h2>
+                <pre class="javascript"><code data-trim>
+                    var a = 0;
+
+                    function increment() {
+                        a+=1;
+                    }
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Pure increment function</h2>
+                <pre class="javascript"><code data-trim>
+                    function increment(a) {
+                        return a+1;
+                    }
+                 </code></pre>
+            </section>
+
+            <section>
+                <h2>Ramda.js</h2>
+                <img style="border: none;           
+                            background-color: white;
+                            position: absolute;
+                            left: 0%;" src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" />
+                <div style="margin-left: 25%">
+                    <p>A practical functional library for JavaScript programmers.</p>
+                    <p><a href="http://ramdajs.com">http://ramdajs.com</a></p>
+                    <p class="fragment">The name?</p>
+                    <p class="fragment">They like sheep.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Some fundamentals</h2>
+                <h3>map</h3>
+                <ul>
+                    <li>similar to forEach</li>
+                    <li>iterates over an array</li>
+                    <li>calls the function on each element</li>
+                    <li>returns results in a new array</li>
+                    <li>think of mapping from one coordinate space to another</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Some fundamentals</h2>
+                <h3>map</h3>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    const double = x => x * 2;
+                    R.map(double, [1,2,3]); //=> [2,4,6]
+                    [1,2,3].map(double); //=> [2,4,6]
+                </code></pre>
+                </div>
+                <p class="fragment">... or map over an object</p>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    const data = { a: 1, b: 2, c: 3 };
+                    R.map(double, data);  //=> { a: 2, b: 4, c: 6 }
+                </code></pre>
+                </div>
+
+            </section>
+
+            <section>
+                <h2>Some fundamentals</h2>
+                <h3>reduce</h3>
+                <ul>
+                    <li>from a list, to a single result</li>
+                    <li>commonly used for aggregates (max, min, sum)
+                </ul>
+            </section>
+
+            <section>
+                <h2>An example with reduce</h2>
+                <pre class="JavaScript"><code data-trim>
+                    const array = [1,2,3];
+                    const sum = R.reduce(R.add, 0, array); // => 6
+                </code></pre>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>var acc = 0;</code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>acc = R.add(acc, array[0]); // => 0 + 1 = 1</code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>acc = R.add(acc, array[1]); // => 1 + 2 = 3</code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>acc = R.add(acc, array[2]); // => 3 + 3 = 6</code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>return acc; // => 6</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Practice with reduce</h2>
+                <pre class="JavaScript"><code data-trim>
+                    // R.reduce( function, accumulator, list)
+                    const sum = R.reduce(R.add, 0, array); 
+                </code></pre>
+                <p>Find the max of an array using reduce and R.max(a,b)</p>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    const max = R.reduce(R.max, Number.MIN_VALUE, array);
+                </code></pre>
+                </div>
+                <p class="fragment">Find the min of an array using reduce and R.min(a,b)</p>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    const min = R.reduce(R.min, Number.MAX_VALUE, array);
+                </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>So what?</h2>
+                <p>Are map and reduce really better than a for loop?</p>
+                <p class="fragment">One place they shine is with filter/reject</p>
+            </section>
+
+            <section>
+                <h3>filter/reject</h3>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    const isEven = x => x % 2 === 0;
+
+                    R.filter(isEven, [1, 2, 3, 4]); // => [2, 4]
+                </code></pre>
+                </div>
+
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    R.reject(isEven, [1, 2, 3, 4]); // => [1, 3]
+                </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <div class="spreadsheet" data-delimiter=",">
+                    category, customer, amount 
+                    Elite, Eric, 34.99 
+                    Delux, Doug, 39.99 
+                    Delux, Drake, 39.99 
+                    Lite, Lewis, 29.99 
+                    Elite, Eleanor, 34.99
+                    Delux, Dakota, 39.99 
+                    Plus, Paul, 24.99 
+                    Elite, Ellen, 34.99 
+                    Basic, Bob, 12.99
+                    Delux, David, 39.99 
+                    Lite, Linda, 29.99 
+                    Plus, Pauline, 24.99 
+                    Delux, Diego, 39.99 
+                    Lite, Lenny, 29.99 
+                    Elite, Edward, 34.99
+                </div>
+            </section>
+
+            <section>
+                <pre class="JavaScript"><code data-trim>
+                      const sales = [
+                        { category: "Elite", customer: "Eric", amount: 34.99 },
+                        { category: "Delux", customer: "Doug", amount: 39.99 },
+                        { category: "Delux", customer: "Drake", amount: 39.99 },
+                        { category: "Lite", customer: "Lewis", amount: 29.99 },
+                        { category: "Elite", customer: "Eleanor", amount: 34.99 },
+                        { category: "Delux", customer: "Dakota", amount: 39.99 },
+                        { category: "Plus", customer: "Paul", amount: 24.99 },
+                        { category: "Elite", customer: "Ellen", amount: 34.99 },
+                        { category: "Basic", customer: "Bob", amount: 12.99 },
+                        { category: "Delux", customer: "David", amount: 39.99 },
+                        { category: "Lite", customer: "Linda", amount: 29.99 },
+                        { category: "Plus", customer: "Pauline", amount: 24.99 },
+                        { category: "Delux", customer: "Diego", amount: 39.99 },
+                        { category: "Lite", customer: "Lenny", amount: 29.99 },
+                        { category: "Elite", customer: "Edward", amount: 34.99 }
+                      ];                    
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Let's filter this list by category</h3>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    const firstSale = sales[0], secondSale = sales[1];
+
+                    const isCategory = (cat, object) => 
+                                        R.prop('category', object) === cat;
+                </code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    isCategory('Elite', firstSale);  // => true
+                    isCategory('Elite', secondSale); // => false
+                </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>What about predicates for all of our categories?</h3>
+                <h4>Spice it up with a little curry</h4>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    const isCategory = R.curry(
+                        ( cat, object ) => R.prop('category', object) === cat
+                        );
+                </code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    const isElite = isCategory("Elite");
+                    const isDelux = isCategory("Delux");
+                </code></pre>
+                </div>
+
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    isElite(firstSale); // => true
+                    isDelux(firstSale); // => false
+                </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>Manually currying our function</h3>
+                <pre class="JavaScript"><code data-trim>
+                    const isCategory = function(cat) {
+                        return function (object) {
+                            return R.prop('category', object) === cat;
+                        }
+                    }
+
+                    const isElite = isCategory('Elite');
+                    isElite(firstSale); // => true
+                    isElite(secondSale); // => false
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Back to filtering...</h3>
+                <pre class="JavaScript"><code data-trim>
+                   const eliteSales = R.filter(isElite, sales);
+                   // => [
+                   //   { category: "Elite", customer: "Eric", amount: 34.99 },
+                   //   { category: "Elite", customer: "Eleanor", amount: 34.99 },
+                   //   { category: "Elite", customer: "Ellen", amount: 34.99 },
+                   //   { category: "Elite", customer: "Edward", amount: 34.99 } 
+                   // ]
+                </code></pre>
+                <pre class="JavaScript"><code data-trim>                   
+                   const deluxSales = R.filter(isDelux, sales);
+                   // => [
+                   //   { category: "Delux", customer: "Doug", amount: 39.99 },
+                   //   { category: "Delux", customer: "Drake", amount: 39.99 },
+                   //   { category: "Delux", customer: "Dakota", amount: 39.99 },
+                   //   { category: "Delux", customer: "David", amount: 39.99 },
+                   //   { category: "Delux", customer: "Diego", amount: 39.99 }
+                   // ]
+                 </code></pre>
+
+            </section>
+
+            <section>
+                <h3>What can we calculate with these lists?</h3>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    // # of sales
+                    R.length(eliteSales); // 4
+                </code></pre>
+                </div>
+
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                    // Total of sales
+                    const getSalesAmounts = R.map(R.prop("amount"));
+                    const eliteSalesAmounts 
+                    = getSalesAmounts(eliteSales); // => [34.99, 34.99, 34.99, 34.99]
+
+                    const sum = R.reduce(R.add, 0);
+                    sum(eliteSalesAmounts); // 139.96
+                </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>All together now</h3>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                        // Filter the array to the items with that category
+                        const filterByCategory = 
+                                (category, objects) => R.filter(
+                                    isCategory(category), objects);
+
+                        // Get the array of sale amounts
+                        const getSalesAmounts = R.map(R.prop("amount"));
+
+                        // And sum it
+                        const sum = R.reduce(R.add, 0);                        
+                    </code></pre>
+                </div>
+
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                        const calculateTotal = R.pipe(
+                            filterByCategory,
+                            getSalesAmounts,
+                            sum
+                        );
+                    </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>Let's break that down...</h3>
+                <pre class="JavaScript"><code data-trim>
+                    calculateTotal("Elite", sales); 
+                </code></pre>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                        var result1 = 
+                            filterByCategory("Elite", sales) // => List of all elite sales
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                        var result2 = getSalesAmounts(result1); // => Array of all amounts
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                        sum(result2); // => 139.96
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                        //Which is equivalent to...
+                        sum( getSalesAmounts( filterByCategory("Elite",sales) ) );
+                    </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>How can I get all of the results at once?</h3>
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                        R.groupBy( R.prop("category"), sales );
+                    </code></pre>
+                </div>
+
+                <div class="fragment">
+                    <pre class="JavaScript"><code data-trim>
+                        {
+                            Basic: [
+                                { category: "Basic", customer: "Bob", amount: 12.99 }
+                            ],
+                            Delux: [
+                                { category: "Delux", customer: "Doug", amount: 39.99 }, ...
+                            ],
+                            Elite: [
+                                { category: "Elite", customer: "Eric", amount: 34.99 }, ...
+                            ],
+                            ...
+                        }
+                    </code></pre>
+                </div>
+            </section>
+            <section>
+                <pre class="JavaScript"><code data-trim>
+                    // Group sales by category
+                    const groupSales = R.groupBy(R.prop("category"))
+
+                    // For a category, sumPrices
+                    const sumPrices = R.pipe( getSalesAmounts, sum );
+
+                    // In one function
+                    const allTotals = R.pipe(
+                        groupSales, 
+                        R.map( sumPrices )
+                    )
+
+                    allTotals(sales);
+                </code></pre>
+                <pre class="JavaScript"><code data-trim>
+                    {
+                        Basic: 12.99,
+                        Delux: 199.95000000000002,
+                        Elite: 139.96,
+                        Lite: 89.97,
+                        Plus: 49.98
+                    }                    
+                </code></pre>
+            </section>
+            <section>
+                    <iframe height='512' scrolling='no' title='Object of Arrays to Array of Objects' src='//codepen.io/bill-kidwell/embed/qXLRxd/?height=265&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/bill-kidwell/pen/qXLRxd/'>Object of Arrays to Array of Objects</a> by Bill Kidwell (<a href='https://codepen.io/bill-kidwell'>@bill-kidwell</a>) on <a href='https://codepen.io'>CodePen</a>.
+                    </iframe>
+            </section>
+            <section>
+                <h3>"zip" Objects</h3>
+                <pre class="JavaScript"><code data-trim>
+                    var labelArray = ['Basic', 'Plus', 'Lite', 'Elite', 'Delux'];
+                    var valueArray = [1,2,3,4,5];
+                    
+                    var result = R.zipObj(labelArray, valueArray);                
+                </code></pre>
+                <pre class="JavaScript"><code data-trim>
+                    { 
+                      "Basic": 1,
+                      "Plus":  2,
+                      "Lite":  3,
+                      "Elite": 4,
+                      "Delux": 5
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h3>Problem statement</h3>
+                <ul>
+                    <li class="fragment">Input is an object, where each value is an array</li>
+                    <li class="fragment">Returns an array of objects</li>
+                    <li class="fragment">Each object has the keys of the original object</li>
+                    <li class="fragment">The length of the array is == shortest array</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Step 1: Get the Lengths of the Arrays</h3>
+                <pre class="JavaScript"><code data-trim>
+                    const getLengths =
+                        arrayObj => R.map(R.length, arrayObj);
+                </code></pre>
+                <pre class="JavaScript"><code data-trim>
+                    var arrayData = {
+                        label: ["Basic", "Plus", "Lite", "Elite", 
+                                "Delux", "Oops", "Uh Oh"],
+                        value: [1, 2, 3, 4, 5],
+                        color: d3.schemeSet1
+                    };
+
+                    getLengths(arrayData); // => { label: 7, value: 5, color: 10 }
+                </code></pre>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Step 2: Find the length of the smallest array</h3>
+                    <pre class="JavaScript"><code data-trim>
+                        // To get the values of the object
+                        R.values(lengthObj); // => [7,5,10]
+
+                        const getMinOfObject = 
+                            lengthObj => 
+                                R.reduce(R.min, Number.MAX_VALUE, R.values(lengthObj));
+
+                        // => 5
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Speaking of objects...</h2>
+                    <div>
+                        <pre class="JavaScript"><code data-trim>
+                        const obj = {a: 2, b: 4, c: 6};
+                    </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre class="JavaScript"><code data-trim>
+                        // Get the keys
+                        R.keys(obj); // => ['a', 'b', 'c']
+                    </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre class="JavaScript"><code data-trim>
+                        // Get the values
+                        R.values(obj); // => [2, 4, 6]
+                    </code></pre>
+                    </div>
+                </section>                
+            </section>
+
+            <section>
+                <h3>Step 3: Build an index array</h3>
+                <p>Instead of determining which array was smallest...</p>
+                <pre class="JavaScript"><code data-trim>
+                    R.range(0, 5); // => [0,1,2,3,4]
+
+                    const getIndexes 
+                        = R.pipe( 
+                            getLengths, 
+                            getMinOfObject, 
+                            R.range(0)
+                        );
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Step 4: Get the nth value of each array</h3>
+                <pre class="JavaScript"><code data-trim>
+                    const getNth = R.curry( 
+                        (arrayObj, n) => R.map( R.nth(n), arrayObj ) 
+                    );
+
+                    getNth(arrayData, 0); 
+                    // => {label:"Basic", value: 1, color:"#e41a1c"},
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>As a single function</h3>
+                <pre class="JavaScript"><code data-trim>
+                    function zipArrays( arrayObj ) { 
+                        var indexes = getIndexes(arrayObj);
+                        return R.map(getNth(arrayObj), indexes);
+                    }                                              
+                </code></pre>
+            </section>
+
+            <section>
+                <iframe height='512' scrolling='no' title='Object of Arrays to Array of Objects' src='//codepen.io/bill-kidwell/embed/qXLRxd/?height=265&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/bill-kidwell/pen/qXLRxd/'>Object of Arrays to Array of Objects</a> by Bill Kidwell (<a href='https://codepen.io/bill-kidwell'>@bill-kidwell</a>) on <a href='https://codepen.io'>CodePen</a>.
+                </iframe>
+            </section>
+
+            <section>
+                <h2>Conclusions</h2>
+                <ul>
+                    <li>The barrier to entry is low</li>
+                    <li>You probably use aspects of it today</li>
+                    <li>Start by using pure functions when you can</li>
+                    <li>map and reduce are a good starting point</li>
+                </ul>
+            </section>
             
+            <section>
+                <h2>Recommended Reading</h2>
+                <p>Randy Coulman's series <a href="http://randycoulman.com/blog/2016/05/24/thinking-in-ramda-getting-started/">Thinking in Ramda</a></p>
+                <p>Eric Elliot's series <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea">Composing Software</a></p>
+                <p><a href="https://drboolean.gitbooks.io/mostly-adequate-guide/">Professor Frisby's Mostly Adequate Guide to Functional Programming</a> by Brian Lonsdorf (aka Dr. Boolean)</p>
+            </section>
 
         </div>
     </div>
@@ -83,6 +617,17 @@
         // Required, even if empty.
         Reveal.initialize({
             slideNumber: true,
+            // Display controls in the bottom right corner
+            controls: true,
+            // Display a presentation progress bar
+            progress: true,
+            // If true; each slide will be pushed to the browser history
+            history: true,
+            // Loops the presentation, defaults to false
+            loop: false,
+            // Flags if mouse wheel navigation should be enabled
+            mouseWheel: true,
+            // Optional libraries used to extend on reveal.js
             dependencies: [
                 // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
                 { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
@@ -101,10 +646,15 @@
                 { src: 'plugin/notes/notes.js', async: true },
 
                 // MathJax
-                { src: 'plugin/math/math.js', async: true }
+                { src: 'plugin/math/math.js', async: true },
+
+                { src: 'plugin/spreadsheet/spreadsheet.js' }
             ]
         });
     </script>
 </body>
 
 </html>
+
+<!--
+-->
