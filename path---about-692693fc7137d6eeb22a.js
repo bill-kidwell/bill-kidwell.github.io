@@ -1,0 +1,2 @@
+webpackJsonp([0xf927f8900006],{489:function(t,e){t.exports={data:{site:{siteMetadata:{title:"Bill Kidwell's blog on software.",author:"Bill Kidwell"}}},pathContext:{}}}});
+//# sourceMappingURL=path---about-692693fc7137d6eeb22a.js.map

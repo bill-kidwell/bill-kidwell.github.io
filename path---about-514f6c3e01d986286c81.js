@@ -1,0 +1,2 @@
+webpackJsonp([0xf927f8900006],{390:function(t,e){t.exports={data:{site:{siteMetadata:{title:"Bill Kidwell",author:"Bill Kidwell"}}},pathContext:{}}}});
+//# sourceMappingURL=path---about-514f6c3e01d986286c81.js.map
