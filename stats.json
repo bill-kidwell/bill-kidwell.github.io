@@ -33,20 +33,24 @@
       "component---src-layouts-index-js-dfed42a02dccac61de2d.js.map"
     ],
     "path---index": [
-      "path---index-23637b3fe9f7780c9b98.js",
-      "path---index-23637b3fe9f7780c9b98.js.map"
+      "path---index-549834054626e3aa9252.js",
+      "path---index-549834054626e3aa9252.js.map"
     ],
     "commons": [
       "commons-e451496cf11f074cbca3.js",
       "commons-e451496cf11f074cbca3.js.map"
+    ],
+    "path---you-are-not-refactoring": [
+      "path---you-are-not-refactoring-e5ee89105f8ecd12c466.js",
+      "path---you-are-not-refactoring-e5ee89105f8ecd12c466.js.map"
     ],
     "path---offline-plugin-app-shell-fallback": [
       "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js",
       "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js.map"
     ],
     "app": [
-      "app-9e1f96850886c3a2b0d0.js",
-      "app-9e1f96850886c3a2b0d0.js.map"
+      "app-fe596ad1ec260eb35493.js",
+      "app-fe596ad1ec260eb35493.js.map"
     ],
     "component---src-pages-about-js": [
       "component---src-pages-about-js-17d2ab56cb29bc092bd9.js",
